@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Camera Access with Permission</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; }
+    video { border: 2px solid #444; border-radius: 10px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Click to Allow Camera Access</h2>
+  <button onclick="startCamera()">Start Camera</button>
+  <br><br>
+  <video id="videoFeed" width="320" height="240" autoplay></video>
+
+  <script>
+    function startCamera() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          document.getElementById('videoFeed').srcObject = stream;
+        })
+        .catch(function (error) {
+          alert("Camera access denied or not supported: " + error);
+        });
+    }
+  </script>
+</body>
+</html>
